@@ -1,4 +1,4 @@
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2017 - The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,34 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+DEVICE_PATH := device/sony/sirius
+
 # inherit from the common shinano definitions
 include device/sony/shinano-common/BoardConfigCommon.mk
 
-# inherit from the proprietary version
-#-include vendor/sony/sirius/BoardConfigVendor.mk
+# inherit from the board common definitions
+include $(DEVICE_PATH)/board/*.mk
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := D6502,D6503,D6506,D6543,sirius
 
+# inherit specific Header
 TARGET_SPECIFIC_HEADER_PATH += device/sony/sirius/include
-
-BOARD_HARDWARE_CLASS += device/sony/sirius/cmhw
 
 # Kernel properties
 TARGET_KERNEL_CONFIG := lineageos_shinano_sirius_defconfig
-
-# Partition information
-BOARD_VOLD_MAX_PARTITIONS := 25
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 12656242688 # 12656259072 - 16384
-
-# Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := device/sony/sirius
-
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/max1187x/wakeup_gesture"
-
-# SELinux
-BOARD_SEPOLICY_DIRS += \
-    device/sony/sirius/sepolicy
-
-# TWRP
-TARGET_RECOVERY_DEVICE_MODULES += twrp.fstab
